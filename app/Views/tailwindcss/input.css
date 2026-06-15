@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* Vazir Regular (normal) */
+@font-face {
+  font-family: 'Vazir';
+  src: url('./fonts/vazir-font-v16.1.0/Vazir.woff2') format('woff2'),
+       url('./fonts/vazir-font-v16.1.0/Vazir.woff') format('woff'),
+       url('./fonts/vazir-font-v16.1.0/Vazir.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Vazir Bold */
+@font-face {
+  font-family: 'Vazir';
+  src: url('./fonts/vazir-font-v16.1.0/Vazir-Bold.woff2') format('woff2'),
+       url('./fonts/vazir-font-v16.1.0/Vazir-Bold.woff') format('woff'),
+       url('./fonts/vazir-font-v16.1.0/Vazir-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+/* Vazir Thin */
+@font-face {
+  font-family: 'Vazir';
+  src: url('./fonts/vazir-font-v16.1.0/Vazir-Thin.woff2') format('woff2'),
+       url('./fonts/vazir-font-v16.1.0/Vazir-Thin.woff') format('woff'),
+       url('./fonts/vazir-font-v16.1.0/Vazir-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+}
+
+/* Vazir Light */
+@font-face {
+  font-family: 'Vazir';
+  src: url('./fonts/vazir-font-v16.1.0/Vazir-Light.woff2') format('woff2'),
+       url('./fonts/vazir-font-v16.1.0/Vazir-Light.woff') format('woff'),
+       url('./fonts/vazir-font-v16.1.0/Vazir-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+/* Vazir Medium */
+@font-face {
+  font-family: 'Vazir';
+  src: url('./fonts/vazir-font-v16.1.0/Vazir-Medium.woff2') format('woff2'),
+       url('./fonts/vazir-font-v16.1.0/Vazir-Medium.woff') format('woff'),
+       url('./fonts/vazir-font-v16.1.0/Vazir-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+
+
+/* Custom styles برای RTL */
+@layer base {
+  html {    
+    direction: rtl;
+  }
+  
+}

@@ -1,0 +1,43 @@
+CREATE TABLE Categories (
+    Id INT PRIMARY KEY,
+    Name VARCHAR(100),
+    ParentId INT,
+    FOREIGN KEY (ParentId) REFERENCES Categories(Id)
+);
+
+
+CREATE TABLE _Schemas (
+    Id INT PRIMARY KEY,
+    EnglishName VARCHAR(400),
+    Name VARCHAR(400),
+    MainImageName VARCHAR(400),
+    CategoryId INT,
+    FOREIGN KEY (CategoryId) REFERENCES categories(Id)
+);
+
+
+CREATE TABLE Products (
+    Id INT PRIMARY KEY,
+    Name VARCHAR(400),
+    Link VARCHAR(400),
+    FinalPrice INT,    
+    SchemaId INT,
+    FOREIGN KEY (SchemaId) REFERENCES _Schemas(Id)
+);
+
+CREATE TABLE Images (
+    Id INT PRIMARY KEY,
+    Name VARCHAR(400),
+    Source VARCHAR(400),
+    SchemaId INT,
+    FOREIGN KEY (SchemaId) REFERENCES _Schemas(Id)
+);
+
+
+CREATE TABLE Properties (
+    Id INT PRIMARY KEY,
+    _Key VARCHAR(200),
+    _Value VARCHAR(200),
+    SchemaId INT,
+    FOREIGN KEY (SchemaId) REFERENCES _Schemas(Id)
+);
