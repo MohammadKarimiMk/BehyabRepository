@@ -70,6 +70,7 @@ ViewComposer::compose('partials.header', function() {
 
 
 $app->router->get('/', [app\Controllers\HomeController::class, 'index']);
+$app->router->get('/product', [app\Controllers\HomeController::class, 'schema_detail']);
 $app->router->get('/categories', [app\Controllers\CategoriesController::class, 'get_categories']);
 
 

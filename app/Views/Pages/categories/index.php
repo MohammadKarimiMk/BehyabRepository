@@ -9,7 +9,7 @@
     },
 
     }">
-    <div class="w-1/3 overflow-scroll" >
+    <div class="w-1/3 overflow-auto" >
         <ul class="h-full divide-y divide-gray-200">
     <?php foreach ($categories as $item): ?>
         <div @click="changeActiveItem(<?php echo $item["id"] ?>)" class="rounded rounded-xs p-2 text-sm h-14 text-center flex items-center justify-center" :class="activeId==<?php echo $item["id"] ?>?'bg-white text-black':'bg-gray-400 text-white'">
@@ -21,7 +21,7 @@
         </ul>
     </div>
 
-    <div class="w-2/3 overflow-scroll">
+    <div class="w-2/3 overflow-auto">
 
       <ul class="h-full divide-y divide-gray-200">
         <template x-for="mainItem in activeItems" :key="mainItem.id">

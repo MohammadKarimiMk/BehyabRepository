@@ -36,10 +36,9 @@ class HomeController extends Controller {
         $this->view('home', $data);
     }
     
-    public function about($id,$page) {        
-       $data = ['page' => $page];
-        // رندر کردن با layout دیگری به نام 'simple'
-        $this->view('about', $data); 
+    public function schema_detail() {        
+        $data = [];        
+        $this->view('schema_detail', $data); 
         
     }
 }
