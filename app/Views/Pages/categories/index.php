@@ -24,10 +24,10 @@
     <div class="w-2/3 overflow-auto">
 
       <ul class="h-full divide-y divide-gray-200">
-        <template x-for="mainItem in activeItems" :key="mainItem.id">
+        <template x-for="(mainItem, index) in activeItems" :key="mainItem.id">
 
         <li x-data="{
-        isOpen:false,
+        isOpen:index==0?true:false,
         toggleIsOpen(){
         this.isOpen=!this.isOpen;
         }

@@ -11,12 +11,14 @@ class Application {
     public $request;
     public $db;
     public $jwt_secret;
+    public $root_route;
     public function __construct($config) {
         self::$app = $this;
         $this->request = new Request();  // اضافه شد
         $this->router = new Router($this->request); // ارسال request به router
         $this->db = new Database($config['db']);
         $this->jwt_secret = $config['jwt_secret'];
+        $this->root_route = $config['root_route'];
     }
     
     public function run() {

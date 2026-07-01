@@ -118,7 +118,10 @@ class Router {
         }
         
         http_response_code(404);
-        return "404 - Page not found";
+        //return "404 - Page not found";
+        ob_start();
+        require 'app/Views/Pages/not_found/index.php';
+        return ob_get_clean();
     
     }
     

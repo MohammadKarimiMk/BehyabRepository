@@ -1,5 +1,5 @@
 <?php
-$config = [
+$config= [
     'db' => [
         'host' => 'localhost',
         'database' => 'behyabdb',
@@ -7,4 +7,6 @@ $config = [
         'password' => ''
     ],
     'jwt_secret'=>"iran",
+    //"root_route"=>dirname($_SERVER['SCRIPT_NAME']),
+    "root_route"=>mb_strtolower(dirname($_SERVER['SCRIPT_NAME']), 'UTF-8'),
 ];

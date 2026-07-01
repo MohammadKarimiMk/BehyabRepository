@@ -3,12 +3,14 @@ namespace app\Controllers;
 
 require_once 'core/Controller.php';
 require_once 'services/schema/GetSchemasListService.php';
-require_once 'services/common/JwtManagerService.php';
+require_once 'services/schema/GetSchemaDetailService.php';
+
 
 use core\Controller;
 
 use services\GetSchemasListService;
-use services\JwtManagerService;
+use services\GetSchemaDetailService;
+
 
 class HomeController extends Controller {
     public function index() {         
@@ -36,9 +38,18 @@ class HomeController extends Controller {
         $this->view('home', $data);
     }
     
-    public function schema_detail() {        
-        $data = [];        
-        $this->view('schema_detail', $data); 
+    public function schema_detail($id) {        
+        $getSchemasListService=new GetSchemaDetailService();
+        $data= $getSchemasListService->execute($id);        
+        //$this->json_response($data,200);
+        
+        if($data["is_success"]==true)
+        {
+            $this->view('schema_detail', $data["data"]); 
+        }
+        else {
+            $this->view('not_found', $data); 
+        }
         
     }
 }

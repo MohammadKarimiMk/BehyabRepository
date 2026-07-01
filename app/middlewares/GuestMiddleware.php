@@ -7,6 +7,8 @@ require_once 'core/Middleware.php';
 
 use core\Middleware;
 use core\Request;
+use core\Application;
+
 
 class GuestMiddleware extends Middleware
 {
@@ -15,7 +17,7 @@ class GuestMiddleware extends Middleware
         
         // اگر کاربر لاگین است، به صفحه اصلی هدایت شو
         if (isset($_SESSION['user_id'])) {
-            $this->redirect("/behyab");
+            $this->redirect(Application::$app->root_route);
         }
 
         $_SESSION['user_id']="salam";        

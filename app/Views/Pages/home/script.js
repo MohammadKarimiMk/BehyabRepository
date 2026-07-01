@@ -1,5 +1,5 @@
 
-history.scrollRestoration = "manual";
+//history.scrollRestoration = "manual";
 function infiniteList() {
     return {
         items: [],
@@ -15,8 +15,8 @@ function infiniteList() {
             this.loading = true;
 
             try {
-                const response = await fetch(
-                    `http://localhost/behyab/api/schema/${this.page}`
+                const response = await fetch(                    
+                    `api/schema/${this.page}`
                 );
 
                 const data = await response.json();
@@ -54,7 +54,7 @@ init() {
             }
         },
         {
-            rootMargin: '50px',
+            rootMargin: '200px',
             threshold:0.1
         }
     );

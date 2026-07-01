@@ -22,6 +22,7 @@ CREATE TABLE Products (
     Link VARCHAR(400),
     FinalPrice INT,    
     SchemaId INT,
+    WebsiteName VARCHAR(200),
     FOREIGN KEY (SchemaId) REFERENCES _Schemas(Id)
 );
 

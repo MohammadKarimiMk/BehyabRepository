@@ -19,9 +19,9 @@ class UploadImageService {
 
 if (isset($file) && $file['error'] === 0) {
 
-    $uploadDir = "images/";
-    //$uploadDir = substr($directory,1);
+    $uploadDir = "images/";    
 
+    
     if (!is_dir($uploadDir)) {
         mkdir($uploadDir, 0777, true);
     }

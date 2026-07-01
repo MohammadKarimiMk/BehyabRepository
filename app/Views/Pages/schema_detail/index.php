@@ -4,7 +4,7 @@
   id="modal"
   class="fixed inset-0 bg-black/90 flex flex-col justify-center"
   x-data="{
-  selectedImage:'https://image.torob.com/base/images/OQ/VS/OQVSCl6l72I6CEVv.webp_/280x280.webp'
+  selectedImage:'<?php echo $detail["MainImageName"]  ?>'
   }"
   x-show="isModalOpen"
 x-on:keydown.escape.window="isModalOpen = false"
@@ -41,18 +41,30 @@ x-on:keydown.escape.window="isModalOpen = false"
 </div>
 
 
-    <div class="flex flex-col md:flex-row justify-center bg-gray-500 m-4 rounded-lg shadow-lg items-center" x-data="{selectedImage:'https://image.torob.com/base/images/OQ/VS/OQVSCl6l72I6CEVv.webp_/280x280.webp'}">
+    <div class="flex flex-col md:flex-row justify-center bg-gray-500 m-4 rounded-lg shadow-lg items-center" x-data="{
+    selectedImage:'<?php echo $detail["MainImageName"]  ?>'
+    }">
 
 
    <div class="flex flex-row justify-center items-center">
      <div class="flex flex-col">
-        <img @click="selectedImage=$el.getAttribute('src')" class="rounded border border-slate-300 p-1 m-2 max-w-20" src="https://image.torob.com/base/images/OQ/VS/OQVSCl6l72I6CEVv.webp_/280x280.webp" alt="">        
-        <img @click="selectedImage=$el.getAttribute('src')" class="rounded border border-slate-300 p-1 m-2 max-w-20" src="https://image.torob.com/base/images/mV/15/mV15zgXvnOCBoSVs.webp_/280x280.webp" alt="">        
-        <img @click="selectedImage=$el.getAttribute('src')" class="rounded border border-slate-300 p-1 m-2 max-w-20" src="https://image.torob.com/base/images/Ki/LC/KiLC4USrByg9LXUV.webp_/280x280.webp" alt="">        
+        <?php if (count($images) > 0): ?>
+        <img @click="selectedImage=$el.getAttribute('src')" class="rounded border border-slate-300 p-1 m-2 max-w-20" src="<?php echo $images[0]["Name"] ?>" alt="">        
+        <?php endif; ?>
+        <?php if (count($images) > 1): ?>
+        <img @click="selectedImage=$el.getAttribute('src')" class="rounded border border-slate-300 p-1 m-2 max-w-20" src="<?php echo $images[1]["Name"] ?>" alt="">        
+        <?php endif; ?>
+        <?php if (count($images) > 2): ?>
+        <img @click="selectedImage=$el.getAttribute('src')" class="rounded border border-slate-300 p-1 m-2 max-w-20" src="<?php echo $images[2]["Name"] ?>" alt="">        
+        <?php endif; ?>
         <!-- <img @click="selectedImage=$el.getAttribute('src')" class="rounded border border-slate-300 p-1 m-2 max-w-20" src="https://image.torob.com/base/images/_k/PD/_kPDqrGRmK6EDxoy.webp" alt="">         -->
+        <?php if (count($images) > 3): ?>
+
          <div @click="isModalOpen=true" class="flex justify-center items-center rounded border border-slate-300 p-1 m-2 h-20 w-20">
-            <p>+4</p>
+            <p>+<?php echo (count($images)-3)?></p>
          </div>
+        <?php endif; ?>
+
     </div>
 
     <img class="rounded-lg max-h-40 md:max-h-64 m-2" :src="selectedImage" alt="">
@@ -61,8 +73,8 @@ x-on:keydown.escape.window="isModalOpen = false"
 
 
     <div class="flex flex-col">
-        <h2 class="text-lg text-white font-bold m-2">گوشی شیائومی Redmi Note 14 4G | حافظه 256 رم 8 گیگابایت</h2>
-        <h4 class="m-2 text-sm text-gray-300">Xiaomi Redmi Note 14 4G 256/8 GB</h4>
+        <h2 class="text-lg text-white font-bold m-2"><?php echo $detail["Name"] ?></h2>
+        <h4 class="m-2 text-sm text-gray-300"><?php echo $detail["EnglishName"] ?></h4>
         <div class="flex m-2 max-w-80 md:max-w-96 overflow-auto">
 
             <div class="min-w-fit text-sm text-white border border-black p-2 rounded-lg m-2">
@@ -84,11 +96,13 @@ x-on:keydown.escape.window="isModalOpen = false"
             
 
         </div>
-        <h2 class="rounded p-2 max-w-fit text-sm text-white m-2 border border-black">۲۰۱ فروشنده دیگر</h2>
+        <h2 class="rounded p-2 max-w-fit text-sm text-white m-2 border border-black"><?php echo $products_count ?> فروشنده</h2>
+            <a target="_blank" href="<?php echo $minProductData["Link"]  ?>">
         <div class="flex flex-col bg-red-500 p-2 rounded-lg m-2">
-            <p class="m-1 text-white font-bold">خرید از گوشی آنلاین</p>
-            <p class="m-1 text-white font-bold">۳۴٫۹۸۸٫۸۰۰ تومان</p>
+            <p class="m-1 text-white font-bold">خرید از <?php echo $minProductData["websiteName"] ?></p>
+            <p class="m-1 text-white font-bold"><?php echo $minProductData["price"] ?> تومان</p>
         </div>
+            </a>
     </div>
 
     </div>
@@ -98,19 +112,32 @@ x-on:keydown.escape.window="isModalOpen = false"
 
 
 
-  <div class="flex flex-col md:flex-row max-h-[1000px]">
+  <div class="flex flex-col md:flex-row max-h-[2000px] md:max-h-[1000px]">
       <div class="flex flex-col bg-gray-500 m-4 rounded-lg shadow-lg max-w-full md:w-2/3 p-2 overflow-auto">
         <h2 class="font-bold text-white text-lg m-2">فروشنده ها</h2>
         
+            <?php foreach ($products as $item): ?>
+            <a target="_blank" href="<?php echo $item["Link"]  ?>">
             <div class="flex flex-col md:flex-row justify-between p-8 border border-gray-400 m-2 rounded-xl md:items-center">
-                <h2 class="font-bold text-white text-lg">موبایل 140</h2>                
-                <h2 class="text-white text-lg">گوشی موبایل شیائومی مدل 14 Redmi Note ظرفیت 256 گیگابایت رم 8 گیگابایت</h2>                
+                <h2 class="font-bold text-white text-lg"><?php echo $item["WebsiteName"]  ?></h2>                
+                <h2 class="text-white text-lg"><?php echo $item["Name"]  ?></h2>                
                 <div class="flex flex-row md:flex-col">
-                    <h2 class="m-2 font-bold text-white text-lg">۳۴٫۹۹۹٫۰۰۰ تومان</h2>
+                    <?php if ($item["FinalPrice"] != '۰'): ?>                    
+                    <h2 class="m-2 font-bold text-white text-lg"><?php echo $item["FinalPrice"]  ?> تومان</h2>
+                    <?php else: ?>
+                    <h2 class="m-2 font-bold text-white text-lg">ناموجود</h2>
+
+                    <?php endif; ?>
+
                     <h2 class="m-2 text-white text-lg bg-red-500 p-2 rounded whitespace-nowrap md:max-w-fit">خرید اینترنتی</h2>                
                 </div>
 
             </div>
+            </a>
+            <?php endforeach; ?>
+
+
+            
 
 
         
@@ -120,74 +147,15 @@ x-on:keydown.escape.window="isModalOpen = false"
 
     <div class="flex flex-col bg-gray-500 m-4 rounded-lg shadow-lg max-w-full md:w-1/3 p-2 overflow-auto">
         <h2 class="font-bold text-white text-lg m-2">مشخصات محصول</h2>
+        <?php foreach ($properties as $item): ?>
         <div class="m-2">
-            <h3 class="text-base text-white">برند</h3>
-            <h3 class="text-base text-gray-300">شیائومی</h3>
+            <h3 class="text-base text-white"><?php echo $item["_Key"] ?></h3>
+            <h3 class="text-base text-gray-300"><?php echo $item["_Value"] ?></h3>
         </div>
-        <div class="m-2">
-            <h3 class="text-base text-white">برند</h3>
-            <h3 class="text-base text-gray-300">شیائومی</h3>
-        </div>
-        <div class="m-2">
-            <h3 class="text-base text-white">برند</h3>
-            <h3 class="text-base text-gray-300">شیائومی</h3>
-        </div>
-        <div class="m-2">
-            <h3 class="text-base text-white">برند</h3>
-            <h3 class="text-base text-gray-300">شیائومی</h3>
-        </div>
-        <div class="m-2">
-            <h3 class="text-base text-white">برند</h3>
-            <h3 class="text-base text-gray-300">شیائومی</h3>
-        </div>
-        <div class="m-2">
-            <h3 class="text-base text-white">برند</h3>
-            <h3 class="text-base text-gray-300">شیائومی</h3>
-        </div>
-        <div class="m-2">
-            <h3 class="text-base text-white">برند</h3>
-            <h3 class="text-base text-gray-300">شیائومی</h3>
-        </div>
-        <div class="m-2">
-            <h3 class="text-base text-white">برند</h3>
-            <h3 class="text-base text-gray-300">شیائومی</h3>
-        </div>
-         <div class="m-2">
-            <h3 class="text-base text-white">برند</h3>
-            <h3 class="text-base text-gray-300">شیائومی</h3>
-        </div>
-         <div class="m-2">
-            <h3 class="text-base text-white">برند</h3>
-            <h3 class="text-base text-gray-300">شیائومی</h3>
-        </div>
-         <div class="m-2">
-            <h3 class="text-base text-white">برند</h3>
-            <h3 class="text-base text-gray-300">شیائومی</h3>
-        </div>
-         <div class="m-2">
-            <h3 class="text-base text-white">برند</h3>
-            <h3 class="text-base text-gray-300">شیائومی</h3>
-        </div>
-         <div class="m-2">
-            <h3 class="text-base text-white">برند</h3>
-            <h3 class="text-base text-gray-300">شیائومی</h3>
-        </div>
-         <div class="m-2">
-            <h3 class="text-base text-white">برند</h3>
-            <h3 class="text-base text-gray-300">شیائومی</h3>
-        </div>
-         <div class="m-2">
-            <h3 class="text-base text-white">برند</h3>
-            <h3 class="text-base text-gray-300">شیائومی</h3>
-        </div>
-         <div class="m-2">
-            <h3 class="text-base text-white">برند</h3>
-            <h3 class="text-base text-gray-300">شیائومی</h3>
-        </div>
-         <div class="m-2">
-            <h3 class="text-base text-white">برند</h3>
-            <h3 class="text-base text-gray-300">شیائومی</h3>
-        </div>
+        <?php endforeach; ?>
+
+
+
     </div>
   </div>
 

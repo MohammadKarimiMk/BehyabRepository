@@ -27,6 +27,7 @@ class MapSqliteToMysqlService {
     $this->db = Application::$app->db;
 
 
+    
     $this->remove_all_records();
 
 
@@ -45,6 +46,63 @@ class MapSqliteToMysqlService {
         }
     }
     
+
+
+        private function create_tables() {
+          
+        
+        $sql = "
+        
+CREATE TABLE Categories (
+    Id INT PRIMARY KEY,
+    Name VARCHAR(100),
+    ParentId INT,
+    FOREIGN KEY (ParentId) REFERENCES Categories(Id)
+);
+
+
+CREATE TABLE _Schemas (
+    Id INT PRIMARY KEY,
+    EnglishName VARCHAR(400),
+    Name VARCHAR(400),
+    MainImageName VARCHAR(400),
+    CategoryId INT,
+    FOREIGN KEY (CategoryId) REFERENCES categories(Id)
+);
+
+
+CREATE TABLE Products (
+    Id INT PRIMARY KEY,
+    Name VARCHAR(400),
+    Link VARCHAR(400),
+    FinalPrice INT,    
+    SchemaId INT,
+    WebsiteName VARCHAR(200),
+    FOREIGN KEY (SchemaId) REFERENCES _Schemas(Id)
+);
+
+CREATE TABLE Images (
+    Id INT PRIMARY KEY,
+    Name VARCHAR(400),
+    Source VARCHAR(400),
+    SchemaId INT,
+    FOREIGN KEY (SchemaId) REFERENCES _Schemas(Id)
+);
+
+
+CREATE TABLE Properties (
+    Id INT PRIMARY KEY,
+    _Key VARCHAR(200),
+    _Value VARCHAR(200),
+    SchemaId INT,
+    FOREIGN KEY (SchemaId) REFERENCES _Schemas(Id)
+);
+
+        ";
+        $this->db->query($sql);
+        
+    }
+
 
     private function remove_all_records() {
           
@@ -68,8 +126,6 @@ WHERE c1.ParentId IS NOT NULL  -- اگر می‌خواهید فقط زیردست
 DELETE FROM categories WHERE ParentId IS NOT NULL;
 
 DELETE FROM categories;
-
-
 
         ";
         $this->db->query($sql);
@@ -122,13 +178,14 @@ DELETE FROM categories;
         $stmt = $this->pdo->query("SELECT * FROM Products");
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         
-        $sql = "INSERT INTO Products (Id,Name,Link,FinalPrice,SchemaId) VALUES (:Id,:Name,:Link,:FinalPrice, :SchemaId)";
+        $sql = "INSERT INTO Products (Id,Name,Link,FinalPrice,WebsiteName,SchemaId) VALUES (:Id,:Name,:Link,:FinalPrice,:WebsiteName, :SchemaId)";
         $this->db->query($sql,
         [
         'Id' => $row["Id"],
         'Name' => $row["Name"],
         'Link' => $row["Link"],
         'FinalPrice' => $row["FinalPrice"],
+        'WebsiteName' => $row["WebsiteName"],
         'SchemaId' => $row["SchemaId"],
          ],
 
@@ -168,8 +225,8 @@ DELETE FROM categories;
         $this->db->query($sql,
         [
         'Id' => $row["Id"],
-        '_Key' => $row["_Key"],
-        '_Value' => $row["_Value"],
+        '_Key' => $row["Key"],
+        '_Value' => $row["Value"],
         'SchemaId' => $row["SchemaId"],
          ],
 

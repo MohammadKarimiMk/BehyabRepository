@@ -1,3 +1,3 @@
-<footer class="bottom-0">
+<footer class="bg-red-500">
     <p>&copy; 2025 - تمامی حقوق محفوظ است</p>
 </footer>

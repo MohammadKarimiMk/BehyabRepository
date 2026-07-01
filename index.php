@@ -44,6 +44,8 @@ use core\ViewComposer;
 use core\Application;
 use services\GetAllCategoriesService;
 
+
+
 $app = new Application($config);
 
 
@@ -62,6 +64,7 @@ ViewComposer::compose('partials.header', function() {
 
     
     
+    
     return [
         'data'=>$res,
     ];
@@ -70,7 +73,7 @@ ViewComposer::compose('partials.header', function() {
 
 
 $app->router->get('/', [app\Controllers\HomeController::class, 'index']);
-$app->router->get('/product', [app\Controllers\HomeController::class, 'schema_detail']);
+$app->router->get('/product/{id}', [app\Controllers\HomeController::class, 'schema_detail']);
 $app->router->get('/categories', [app\Controllers\CategoriesController::class, 'get_categories']);
 
 

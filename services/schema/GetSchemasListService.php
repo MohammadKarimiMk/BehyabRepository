@@ -24,7 +24,7 @@ class GetSchemasListService {
         
         $db = Application::$app->db;
 
-        $per_page=10;
+        $per_page=20;
         $offset = ($current_page - 1) * $per_page;
         
         $total=($db->query('SELECT COUNT(*) as total FROM _schemas')->fetch(PDO::FETCH_ASSOC))['total'];
@@ -54,7 +54,7 @@ ORDER BY
        foreach ($schemas as &$item) {
     if (isset($item['cheapest_price'])) {
         $item['cheapest_price'] = $this->toPersianNumber($item['cheapest_price']);
-        $item['MainImageName']=(isset($_SERVER['HTTPS']) ? 'https://' : 'http://') .$_SERVER['HTTP_HOST'].'/behyab/'.'/images/'.$item['MainImageName'];
+        $item['MainImageName']=(isset($_SERVER['HTTPS']) ? 'https://' : 'http://') .$_SERVER['HTTP_HOST'].Application::$app->root_route.'/images/'.$item['MainImageName'];
     }
 }
         

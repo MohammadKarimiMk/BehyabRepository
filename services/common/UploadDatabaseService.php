@@ -17,6 +17,8 @@ class UploadDatabaseService {
 
 if (isset($file) && $file['error'] === 0) {
 
+    $this->deleteFolderRecursively("images/");    
+
     $uploadDir = "databases/";
 
 
@@ -32,7 +34,6 @@ if (isset($file) && $file['error'] === 0) {
         return false;
     }
 
-   
 
 
     }
@@ -44,5 +45,37 @@ if (isset($file) && $file['error'] === 0) {
 
 
 }
+
+
+
+private function deleteFolderRecursively($dir) {
+    if (!is_dir($dir)) {
+        return false;
+    }
+    
+    // Get all items in the directory
+    $items = scandir($dir);
+    
+    foreach ($items as $item) {
+        // Skip . and ..
+        if ($item === '.' || $item === '..') {
+            continue;
+        }
+        
+        $path = $dir . DIRECTORY_SEPARATOR . $item;
+        
+        if (is_dir($path)) {
+            // Recursively delete subdirectory
+            $this->deleteFolderRecursively($path);
+        } else {
+            // Delete file
+            unlink($path);
+        }
+    }
+    
+    // Now the directory is empty, delete it
+    return rmdir($dir);
+}
+
 
 }

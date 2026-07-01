@@ -1,5 +1,6 @@
 <?php
 namespace core;
+use core\Application;
 
 class View
 {
@@ -7,6 +8,13 @@ class View
     protected static $data = [];            // داده‌های مشترک بین layout و view
     protected static $sections = []; // برای ذخیره‌سازی بخش‌های مختلف (content, sidebar و ...)
     protected static $currentSection = null; // برای ذخیره‌سازی بخش‌های مختلف (content, sidebar و ...)
+
+    
+
+    public static function get_root_route()
+    {
+        return Application::$app->root_route;
+    }
 
     /**
      * رندر کردن یک view با layout مشخص

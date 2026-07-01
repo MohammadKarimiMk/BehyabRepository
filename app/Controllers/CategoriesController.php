@@ -4,6 +4,11 @@ namespace app\Controllers;
 require_once 'core/Controller.php';
 require_once 'services/categories/GetAllCategoriesService.php';
 
+//config
+require_once 'config/config.php';
+//config
+
+
 use core\Controller;
 use core\Application;
 
@@ -15,7 +20,7 @@ class CategoriesController extends Controller {
     public function get_categories() {         
         $user_agent=Application::$app->request->header('HTTP_USER_AGENT');
         if(str_contains($user_agent,'Mobile')==false){
-            $this->redirect('/behyab');   
+            $this->redirect(Application::$app->root_route);   
         }
         $getAllCategoriesService=new GetAllCategoriesService();
         $categories= $getAllCategoriesService->execute();
