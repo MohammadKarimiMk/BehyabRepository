@@ -11,6 +11,8 @@ function infiniteList(category_id) {
         observer: null,
 
         async loadMore() {
+
+
             //if (this.loading || !this.hasMore) return;
 
             if(!this.hasMore)return;
@@ -21,11 +23,12 @@ function infiniteList(category_id) {
             }
 
 
+
             this.loading = true;
 
             try {
                 const response = await fetch(                    
-                    `api/schema/${this.page}`
+                    `../api/schema/${this.page}/${category_id}`
                 );
 
                 const data = await response.json();

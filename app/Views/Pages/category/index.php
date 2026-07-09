@@ -1,4 +1,17 @@
 
+
+<div class="flex gap-x-2 m-4">
+    <?php foreach ($categories_tree as $index =>$item): ?>
+        <a href="<?= \core\View::get_root_route() ?>/category/<?= $item["Id"] ?>">
+            <h3 class="font-bold text-lg text-gray-400 hover:text-black transition transition-200"><?= $item["Name"] ?></h3>
+        </a>
+        <h3 class="text-gray-400 text-lg"> / </h3>        
+
+
+    <?php endforeach; ?>
+
+</div>
+
 <!-- محتوای اصلی (به طور خودکار در بخش 'content' قرار می‌گیرد) -->
     <div
      x-data="infiniteList(<?php echo $category_id ?>)"
@@ -18,7 +31,7 @@
 
     
         <template x-for="item in items" :key="item.Id">
-            <a target="_blank" :href="`product/${item.Id}`">
+            <a target="_blank" :href="`<?= \core\View::get_root_route() ?>/product/${item.Id}`">
  <div class="flex flex-col m-2 bg-gray-400 shadow shadow-lg rounded-lg">
             <img class="object-contain h-40 rounded-t-lg" :src="item.MainImageName" alt="">
             <h1 class="line-clamp-3 text-sm text-black m-2" x-text="item.Name"></h1>

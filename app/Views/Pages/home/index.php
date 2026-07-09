@@ -19,7 +19,7 @@
 
     
         <template x-for="item in items" :key="item.Id">
-            <a target="_blank" :href="`product/${item.Id}`">
+            <a target="_blank" :href="`<?= \core\View::get_root_route() ?>/product/${item.Id}`">
  <div class="flex flex-col m-2 bg-gray-400 shadow shadow-lg rounded-lg">
             <img class="object-contain h-40 rounded-t-lg" :src="item.MainImageName" alt="">
             <h1 class="line-clamp-3 text-sm text-black m-2" x-text="item.Name"></h1>

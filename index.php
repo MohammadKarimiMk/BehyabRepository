@@ -62,7 +62,9 @@ ViewComposer::compose('partials.header', function() {
     $getAllCategoriesService=new GetAllCategoriesService();
     $res=$getAllCategoriesService->execute();
 
-    
+    //http_response_code(200);
+      //  header('Content-Type: application/json');
+        //echo json_encode($res, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
     
     
     return [

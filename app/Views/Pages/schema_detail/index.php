@@ -97,12 +97,15 @@ x-on:keydown.escape.window="isModalOpen = false"
 
         </div>
         <h2 class="rounded p-2 max-w-fit text-sm text-white m-2 border border-black"><?php echo $products_count ?> فروشنده</h2>
+            <?php if ($minProductData != null): ?>                    
             <a target="_blank" href="<?php echo $minProductData["Link"]  ?>">
         <div class="flex flex-col bg-red-500 p-2 rounded-lg m-2">
             <p class="m-1 text-white font-bold">خرید از <?php echo $minProductData["websiteName"] ?></p>
             <p class="m-1 text-white font-bold"><?php echo $minProductData["price"] ?> تومان</p>
         </div>
             </a>
+            <?php endif; ?>
+
     </div>
 
     </div>

@@ -6,6 +6,9 @@ require_once 'services/categories/GetAllCategoriesService.php';
 
 require_once 'services/schema/GetSchemasListService.php';
 
+require_once 'services/categories/GetCategoriesTreeService.php';
+
+
 //config
 require_once 'config/config.php';
 //config
@@ -18,6 +21,9 @@ use core\Application;
 use services\GetAllCategoriesService;
 
 use services\GetSchemasListService;
+
+use services\GetCategoriesTreeService;
+
 
 
 class CategoriesController extends Controller {
@@ -42,9 +48,18 @@ class CategoriesController extends Controller {
         $getSchemasListService=new GetSchemasListService();
         $schemas= $getSchemasListService->execute(1,$id);
 
+        $getCategoriesTreeService =new GetCategoriesTreeService();
+
+        
+        $categories_tree=$getCategoriesTreeService->execute($id);
+
+        
+        //$this->json_response($categories_tree,200);
+
           $data = [
             'category_id'=>$id,
             'schemas'=>$schemas["data"],
+            'categories_tree'=>$categories_tree,
         ];
         
         // رندر کردن view درون layout پیش‌فرض (main)

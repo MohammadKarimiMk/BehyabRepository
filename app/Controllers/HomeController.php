@@ -6,10 +6,15 @@ require_once 'services/schema/GetSchemasListService.php';
 require_once 'services/schema/GetSchemaDetailService.php';
 
 
+
+
+
 use core\Controller;
 
 use services\GetSchemasListService;
 use services\GetSchemaDetailService;
+
+
 
 
 class HomeController extends Controller {
@@ -23,6 +28,9 @@ class HomeController extends Controller {
         // echo "<br>";
         // print_r($jwtManagerService->verify($token,"iran"));
 
+
+        
+        
 
         
         $getSchemasListService=new GetSchemasListService();
@@ -44,8 +52,9 @@ class HomeController extends Controller {
         //$this->json_response($data,200);
         
         if($data["is_success"]==true)
-        {
+        {            
             $this->view('schema_detail', $data["data"]); 
+            
         }
         else {
             $this->view('not_found', $data); 
