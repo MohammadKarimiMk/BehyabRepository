@@ -1,7 +1,7 @@
 
 history.scrollRestoration = "manual";
 let a=0;
-function infiniteList() {
+function infiniteList(category_id) {
     return {
         items: [],
         page: 2,

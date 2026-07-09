@@ -1,8 +1,7 @@
 
 <!-- محتوای اصلی (به طور خودکار در بخش 'content' قرار می‌گیرد) -->
- <h1 class="text-3xl text-center">صفحه اصلی</h1>
     <div
-     x-data="infiniteList()"
+     x-data="infiniteList(<?php echo $category_id ?>)"
      x-init="init()"
      x-ref="rootContainer"
      >
@@ -34,7 +33,6 @@
 
 
     <p x-text="items.length"></p>
-    
 
 
 
@@ -62,6 +60,6 @@
 ?>
 
 
-<script src="<?php echo \core\View::get_root_route() ?>/app/Views/Pages/home/script.js"></script>
+<script src="<?php echo \core\View::get_root_route() ?>/app/Views/Pages/category/script.js"></script>
 <?php \core\View::endSection(); ?>
 

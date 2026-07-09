@@ -139,4 +139,31 @@ class View
         // می‌توانید از یک متغیر سراسری یا کانفیگ بخوانید
         return 'main';
     }
+
+    protected static function getComponentFile($component)
+{
+    $component = str_replace('.', '/', $component);
+
+    return "app/Views/Components/{$component}.php";
+}
+
+    public static function component($component, $data = [])
+{
+    // دریافت داده‌های ViewComposer
+    $composerData = ViewComposer::getData("components.$component");
+
+    $data = array_merge($composerData, $data);
+
+    $componentPath = self::getComponentFile($component);
+
+    if (!file_exists($componentPath)) {
+        die("Component not found: " . $componentPath);
+    }
+
+    extract($data);
+
+    require $componentPath;
+}
+
+
 }

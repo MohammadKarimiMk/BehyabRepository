@@ -4,6 +4,8 @@ namespace app\Controllers;
 require_once 'core/Controller.php';
 require_once 'services/categories/GetAllCategoriesService.php';
 
+require_once 'services/schema/GetSchemasListService.php';
+
 //config
 require_once 'config/config.php';
 //config
@@ -15,6 +17,8 @@ use core\Application;
 
 use services\GetAllCategoriesService;
 
+use services\GetSchemasListService;
+
 
 class CategoriesController extends Controller {
     public function get_categories() {         
@@ -25,14 +29,28 @@ class CategoriesController extends Controller {
         $getAllCategoriesService=new GetAllCategoriesService();
         $categories= $getAllCategoriesService->execute();
           $data = [
-            'title' => 'صفحه اصلی',
-            'message' => 'به فریم‌ورک ما خوش آمدید!',
             'categories'=>$categories["categories"],
         ];
         
         // رندر کردن view درون layout پیش‌فرض (main)
         $this->view('categories', $data);
     }
+
+        public function get_schemas_by_category($id) {         
+
+     
+        $getSchemasListService=new GetSchemasListService();
+        $schemas= $getSchemasListService->execute(1,$id);
+
+          $data = [
+            'category_id'=>$id,
+            'schemas'=>$schemas["data"],
+        ];
+        
+        // رندر کردن view درون layout پیش‌فرض (main)
+        $this->view('category', $data);
+        
+        }
     
     public function about($id,$page) {        
        $data = ['page' => $page];
