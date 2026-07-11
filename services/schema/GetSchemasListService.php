@@ -18,7 +18,7 @@ class GetSchemasListService {
         return str_replace($english, $persian, (string)$number);
     }
     
-    public function execute($current_page, $categoryId = null) {
+    public function execute($current_page, $categoryId = null,$searchKey=null) {
         try {
             $db = Application::$app->db;
             $per_page = 20;
@@ -64,7 +64,35 @@ class GetSchemasListService {
                 $countSql = "SELECT COUNT(*) as total FROM _schemas WHERE categoryId IN ($placeholders)";
                 $total = $db->query($countSql, $categoryIds)->fetch(PDO::FETCH_ASSOC)['total'];
                 
-            } else {
+            }
+            else if($searchKey !== null){
+
+            
+            $searchKey="%".$searchKey."%";
+                   // اگر categoryId null باشد، همه schema ها را نمایش می‌دهیم
+                $sql = "SELECT 
+                    s.Id,
+                    s.Name,
+                    s.MainImageName,
+                    COALESCE(
+                        MIN(CASE WHEN p.FinalPrice > 0 THEN p.FinalPrice END),
+                        0
+                    ) AS cheapest_price
+                FROM _schemas s
+                LEFT JOIN products p ON p.SchemaId = s.Id
+                WHERE s.EnglishName LIKE :searchKey OR s.Name LIKE :searchKey
+                GROUP BY s.Id, s.Name
+                ORDER BY 
+                    CASE WHEN COALESCE(MIN(CASE WHEN p.FinalPrice > 0 THEN p.FinalPrice END), 0) = 0 
+                         THEN 1 ELSE 0 END,
+                    COALESCE(MIN(CASE WHEN p.FinalPrice > 0 THEN p.FinalPrice END), 0) ASC
+                LIMIT :perPage OFFSET :offset";
+                
+                $schemas = $db->query($sql, ["perPage"=>$per_page,"offset"=> $offset,"searchKey"=>$searchKey])->fetchAll(PDO::FETCH_ASSOC);
+                $countSql = "SELECT COUNT(*) as total FROM _schemas WHERE EnglishName LIKE :searchKey OR Name LIKE :searchKey";
+                $total = $db->query($countSql,["searchKey"=>$searchKey])->fetch(PDO::FETCH_ASSOC)['total'];
+            }
+             else {
                 // اگر categoryId null باشد، همه schema ها را نمایش می‌دهیم
                 $sql = "SELECT 
                     s.Id,

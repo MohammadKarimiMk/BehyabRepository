@@ -16,8 +16,7 @@ require_once 'config/config.php';
 
 use core\Controller;
 use core\Application;
-
-
+use core\View;
 use services\GetAllCategoriesService;
 
 use services\GetSchemasListService;
@@ -60,6 +59,10 @@ class CategoriesController extends Controller {
             'category_id'=>$id,
             'schemas'=>$schemas["data"],
             'categories_tree'=>$categories_tree,
+            "meta_data"=>[
+                "rootUrl"=>View::get_root_route(),
+                'category_id'=>$id
+            ]
         ];
         
         // رندر کردن view درون layout پیش‌فرض (main)

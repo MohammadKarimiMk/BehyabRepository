@@ -1,6 +1,8 @@
 
 <!-- محتوای اصلی (به طور خودکار در بخش 'content' قرار می‌گیرد) -->
- <h1 class="text-3xl text-center">صفحه اصلی</h1>
+ 
+
+
     <div
      x-data="infiniteList()"
      x-init="init()"

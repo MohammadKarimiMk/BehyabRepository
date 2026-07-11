@@ -1,20 +1,10 @@
 
 
-<div class="flex gap-x-2 m-4">
-    <?php foreach ($categories_tree as $index =>$item): ?>
-        <a href="<?= \core\View::get_root_route() ?>/category/<?= $item["Id"] ?>">
-            <h3 class="font-bold text-lg text-gray-400 hover:text-black transition transition-200"><?= $item["Name"] ?></h3>
-        </a>
-        <h3 class="text-gray-400 text-lg"> / </h3>        
-
-
-    <?php endforeach; ?>
-
-</div>
+<h1 class="text-2xl font-bold m-2">جست جو برای "<?= $searchKey ?>"</h1>
 
 <!-- محتوای اصلی (به طور خودکار در بخش 'content' قرار می‌گیرد) -->
     <div
-     x-data="infiniteList('<?= \core\View::get_root_route() ?>',<?= $category_id ?>)"
+     x-data="infiniteList('<?= \core\View::get_root_route() ?>','<?= $searchKey ?>')"
      x-init="init()"
      x-ref="rootContainer"
      >
@@ -73,6 +63,6 @@
 ?>
 
 
-<script src="<?php echo \core\View::get_root_route() ?>/app/Views/Pages/category/script.js"></script>
+<script src="<?php echo \core\View::get_root_route() ?>/app/Views/Pages/search/script.js"></script>
 <?php \core\View::endSection(); ?>
 

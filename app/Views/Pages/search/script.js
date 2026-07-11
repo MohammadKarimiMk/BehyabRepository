@@ -1,7 +1,7 @@
 
 history.scrollRestoration = "manual";
 let a=0;
-function infiniteList(rootUrl,category_id) {
+function infiniteList(rootUrl,searchKey) {
     return {
         items: [],
         page: 2,
@@ -27,10 +27,10 @@ function infiniteList(rootUrl,category_id) {
             this.loading = true;
 
             try {
-                let url=`${rootUrl}/api/schema/${this.page}/${category_id}`;
+                let url=`${rootUrl}/api/schema/search/${this.page}/${searchKey}`;
+                console.log('ur : ',url);
                 
                 const response = await fetch(url);
-
 
                 const data = await response.json();
                 console.log('data is : ',data);

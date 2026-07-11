@@ -78,6 +78,7 @@ $app->router->get('/', [app\Controllers\HomeController::class, 'index']);
 $app->router->get('/product/{id}', [app\Controllers\HomeController::class, 'schema_detail']);
 $app->router->get('/categories', [app\Controllers\CategoriesController::class, 'get_categories']);
 $app->router->get('/category/{id}', [app\Controllers\CategoriesController::class, 'get_schemas_by_category']);
+$app->router->get('/search', [app\Controllers\HomeController::class, 'search_schemas']);
 
 
 
@@ -92,6 +93,7 @@ $app->router->get('/api/test',[app\Controllers\TestApiController::class, 'test_f
 
 $app->router->get('/api/schema/{page}',[app\Controllers\SchemasApiController::class, 'get_schemas']);
 $app->router->get('/api/schema/{page}/{category}',[app\Controllers\SchemasApiController::class, 'get_schemas_by_category']);
+$app->router->get('/api/schema/search/{page}/{searchkey}',[app\Controllers\SchemasApiController::class, 'search_schemas']);
 
 
 

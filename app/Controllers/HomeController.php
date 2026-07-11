@@ -2,6 +2,7 @@
 namespace app\Controllers;
 
 require_once 'core/Controller.php';
+require_once 'core/Application.php';
 require_once 'services/schema/GetSchemasListService.php';
 require_once 'services/schema/GetSchemaDetailService.php';
 
@@ -13,6 +14,8 @@ use core\Controller;
 
 use services\GetSchemasListService;
 use services\GetSchemaDetailService;
+
+use core\Application;
 
 
 
@@ -44,6 +47,21 @@ class HomeController extends Controller {
         
         // رندر کردن view درون layout پیش‌فرض (main)
         $this->view('home', $data);
+    }
+
+    public function search_schemas(){
+        
+        $key= Application::$app->request->get()["searchKey"];
+
+
+        $getSchemasListService=new GetSchemasListService();
+        $schemas= $getSchemasListService->execute(1,searchKey:$key);
+        $data = [
+            'schemas'=>$schemas["data"],
+            'searchKey'=>$key,
+        ];
+        $this->view('search', $data);
+
     }
     
     public function schema_detail($id) {        

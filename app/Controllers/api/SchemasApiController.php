@@ -24,4 +24,10 @@ class SchemasApiController extends Controller {
     
     $this->json_response($schemas,200);
     }    
+    public function search_schemas($page,$search_key) {         
+    $getSchemasListService=new GetSchemasListService();
+    $schemas= $getSchemasListService->execute($page,searchKey:$search_key);
+    
+    $this->json_response($schemas,200);
+    }    
 }

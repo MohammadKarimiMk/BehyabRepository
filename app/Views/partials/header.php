@@ -56,8 +56,45 @@
       <li><a class="text-xl hover:bg-gray-300 transition duration-100 p-2 rounded-lg" href="/">درباره ما</a></li>
     </ul>       
   </nav>
+
+
+
+
+
+
+
  
-  <a class="border border-2 border-gray-300 rounded-xl p-2" href="#">ورود/ثبت نام</a>
+  <div class="flex justify-center items-center">
+    <form action="<?= \core\View::get_root_route() ?>/search" class="h-10 flex justify-center items-center border-2 border-gray-300 m-2 bg-white rounded-xl" 
+          role="search">
+        
+        <button type="submit" 
+                class="group h-full w-1/6 flex items-center justify-center cursor-pointer hover:bg-gray-100 rounded-r-xl transition-colors"
+                aria-label="جستجو">
+            <svg class="text-gray-400 group-hover:text-blue-500 transition-colors" 
+                 xmlns="http://www.w3.org/2000/svg" 
+                 width="24" height="24" 
+                 viewBox="0 0 24 24" 
+                 fill="none" 
+                 stroke="currentColor" 
+                 stroke-width="2" 
+                 stroke-linecap="round" 
+                 stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"/>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+        </button>
+        
+        <input class="w-5/6 bg-transparent placeholder-gray-400 p-2 focus:outline-none" 
+               type="text" 
+               placeholder="جست و جو در بین محصولات"
+               name="searchKey"
+               id="searchInput"
+               autocomplete="off"/>
+    </form>
+</div>
+   <a class="border border-2 border-gray-300 rounded-xl p-2" href="#">ورود/ثبت نام</a>
+  
 </header>
 
 
