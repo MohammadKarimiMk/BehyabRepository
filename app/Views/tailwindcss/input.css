@@ -3,6 +3,8 @@
 @tailwind utilities;
 
 
+
+
 /* Vazir Regular (normal) */
 @font-face {
   font-family: 'Vazir';
@@ -60,5 +62,11 @@
   html {    
     direction: rtl;
   }
+
+
+  [x-cloak] {
+    display: none !important;
+}
+
   
 }

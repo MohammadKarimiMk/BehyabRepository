@@ -1,4 +1,4 @@
-<div class=" fixed flex md:hidden w-full bottom-0 right-0 bg-white justify-between p-2" x-data="{activeId:1}">
+<div class=" fixed flex md:hidden w-full bottom-0 right-0 bg-white justify-between p-2">
 
 <!-- <div class="flex flex-col items-center" :class="activeId==1?'text-red-400':''" @click="activeId=1">
 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -9,7 +9,8 @@
 </div> -->
 
 
-<div class="flex flex-col items-center" :class="activeId==1?'text-red-400':''" @click="activeId=1">
+<a href="<?php echo \core\View::get_root_route() ?>">
+<div class="flex flex-col items-center <?= $selected_page=='home'?'text-red-400':''?>">
  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path d="M3 10.5L12 3L21 10.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
   <path d="M5 9.5V21H19V9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -17,9 +18,11 @@
 </svg>
 <h3 class="text-sm">خانه</h3>
 </div>
+</a>
 
 
-<div class="flex flex-col items-center" :class="activeId==2?'text-red-400':''" @click="activeId=2">
+<a href="<?php echo \core\View::get_root_route() ?>/categories">
+<div class="flex flex-col items-center <?= $selected_page=='categories'?'text-red-400':''?>">
  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path d="M4 4H10V10H4V4Z" stroke="currentColor" stroke-width="2"/>
   <path d="M14 4H20V10H14V4Z" stroke="currentColor" stroke-width="2"/>
@@ -28,7 +31,7 @@
 </svg>
 <h3 class="text-sm">دسته بندی</h3>
 </div>
-
+</a>
 
 
 <div class="flex flex-col items-center" :class="activeId==4?'text-red-400':''" @click="activeId=4">

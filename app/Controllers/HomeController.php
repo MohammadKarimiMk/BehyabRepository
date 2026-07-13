@@ -17,6 +17,7 @@ use services\GetSchemaDetailService;
 
 use core\Application;
 
+use core\ViewComposer;
 
 
 
@@ -33,7 +34,13 @@ class HomeController extends Controller {
 
 
         
-        
+        ViewComposer::compose('partials.navbar', function() {
+
+    return [
+        'selected_page'=>'home',
+    ];
+});
+
 
         
         $getSchemasListService=new GetSchemasListService();
@@ -64,11 +71,15 @@ class HomeController extends Controller {
 
     }
     
-    public function schema_detail($id) {        
+    public function schema_detail($id) {       
+    
+
+    
         $getSchemasListService=new GetSchemaDetailService();
         $data= $getSchemasListService->execute($id);        
         //$this->json_response($data,200);
         
+        //$this->json_response($data,200);
         if($data["is_success"]==true)
         {            
             $this->view('schema_detail', $data["data"]); 

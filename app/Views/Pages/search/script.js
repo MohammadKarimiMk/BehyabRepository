@@ -3,7 +3,6 @@ history.scrollRestoration = "manual";
 let a=0;
 function infiniteList(rootUrl,searchKey) {
     return {
-        items: [],
         page: 2,
         loading: false,
         pendingLoad:false,
@@ -37,9 +36,14 @@ function infiniteList(rootUrl,searchKey) {
                 
 
 
-                this.items.push(...data.data);
+                
 
-                console.log(data.data.length);
+                        if (data.html) {
+            this.$refs.grid.insertAdjacentHTML(
+                'beforeend',
+                data.html
+            );
+        }
                 
                 a+=data.data.length;
 

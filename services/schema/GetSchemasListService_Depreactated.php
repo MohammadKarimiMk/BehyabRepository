@@ -5,7 +5,7 @@ use core\Application;
 
 use PDO;
 
-class GetSchemasListService {
+class GetSchemasListService_depricated {
     
     private function toPersianNumber($number) {
     $english = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
@@ -90,11 +90,11 @@ LIMIT :per_page OFFSET :offset";
         //$schemas=$db->query($sql,["per_page"=>$per_page,"offset"=>$offset,])->fetchAll(PDO::FETCH_ASSOC);
 
         
-       foreach ($schemas as &$item) {
+       foreach ($schemas as $item) {
     if (isset($item['cheapest_price'])) {
         $item['cheapest_price'] = $this->toPersianNumber($item['cheapest_price']);
+        }
         $item['MainImageName']=(isset($_SERVER['HTTPS']) ? 'https://' : 'http://') .$_SERVER['HTTP_HOST'].Application::$app->root_route.'/images/'.$item['MainImageName'];
-    }
 }
         
 

@@ -15,6 +15,19 @@ class SchemasApiController extends Controller {
     $getSchemasListService=new GetSchemasListService();
     $schemas= $getSchemasListService->execute($page);
     
+    
+
+    
+$clonedSchemasData=$schemas["data"];
+$schemas["data"]=[];
+
+$schemas["html"]="";
+ foreach ($clonedSchemasData as $key => $value) {
+         $schemas["html"].=\core\View::renderComponent('schema_card', [
+     'detail' => $value,
+ ])."\n";
+     }
+
     $this->json_response($schemas,200);
     }    
 
@@ -22,12 +35,40 @@ class SchemasApiController extends Controller {
     $getSchemasListService=new GetSchemasListService();
     $schemas= $getSchemasListService->execute($page,$category_id);
     
+    //$test=[];
+    //$this->json_response($schemas,200);
+    //$this->json_response($test,200);
+
+
+$clonedSchemasData=$schemas["data"];
+$schemas["data"]=[];
+
+$schemas["html"]="";
+ foreach ($clonedSchemasData as $key => $value) {
+         $schemas["html"].=\core\View::renderComponent('schema_card', [
+     'detail' => $value,
+ ])."\n";
+     }
+
     $this->json_response($schemas,200);
+
+
     }    
     public function search_schemas($page,$search_key) {         
     $getSchemasListService=new GetSchemasListService();
     $schemas= $getSchemasListService->execute($page,searchKey:$search_key);
     
+
+
+    $clonedSchemasData=$schemas["data"];
+$schemas["data"]=[];
+
+$schemas["html"]="";
+ foreach ($clonedSchemasData as $key => $value) {
+         $schemas["html"].=\core\View::renderComponent('schema_card', [
+     'detail' => $value,
+ ])."\n";
+     }
     $this->json_response($schemas,200);
     }    
 }

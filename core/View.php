@@ -147,11 +147,12 @@ class View
     return "app/Views/Components/{$component}.php";
 }
 
-    public static function component($component, $data = [])
+public static function renderComponent($component, $data = [])
 {
     // دریافت داده‌های ViewComposer
     $composerData = ViewComposer::getData("components.$component");
 
+    // ادغام داده‌ها (داده‌های ارسالی اولویت دارند)
     $data = array_merge($composerData, $data);
 
     $componentPath = self::getComponentFile($component);
@@ -162,8 +163,34 @@ class View
 
     extract($data);
 
+    ob_start();
+
     require $componentPath;
+
+    return ob_get_clean();
 }
+public static function component($component, $data = [])
+{
+    echo self::renderComponent($component, $data);
+}
+
+//     public static function component($component, $data = [])
+// {
+//     // دریافت داده‌های ViewComposer
+//     $composerData = ViewComposer::getData("components.$component");
+
+//     $data = array_merge($composerData, $data);
+
+//     $componentPath = self::getComponentFile($component);
+
+//     if (!file_exists($componentPath)) {
+//         die("Component not found: " . $componentPath);
+//     }
+
+//     extract($data);
+
+//     require $componentPath;
+// }
 
 
 }

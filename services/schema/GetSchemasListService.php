@@ -6,17 +6,7 @@ use PDO;
 
 class GetSchemasListService {
     
-    private function toPersianNumber($number) {
-        $english = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-        $persian = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
-        
-        if (is_numeric($number)) {
-            $formatted = number_format((float)$number);
-            return str_replace($english, $persian, $formatted);
-        }
-        
-        return str_replace($english, $persian, (string)$number);
-    }
+
     
     public function execute($current_page, $categoryId = null,$searchKey=null) {
         try {
@@ -119,9 +109,8 @@ class GetSchemasListService {
             // فرمت کردن خروجی
             foreach ($schemas as &$item) {
                 if (isset($item['cheapest_price'])) {
-                    $item['cheapest_price'] = $this->toPersianNumber($item['cheapest_price']);
-                    $item['MainImageName'] = (isset($_SERVER['HTTPS']) ? 'https://' : 'http://') . 
-                        $_SERVER['HTTP_HOST'] . Application::$app->root_route . '/images/' . $item['MainImageName'];
+                    $item['cheapest_price'] = Application::$app->tools->toPersianNumber($item['cheapest_price']);
+                    $item['MainImageName'] = Application::$app->tools->getFullImageUrl($item['MainImageName']);
                 }
             }
             

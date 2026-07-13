@@ -6,6 +6,7 @@
   x-data="{
   selectedImage:'<?php echo $detail["MainImageName"]  ?>'
   }"
+  x-cloak
   x-show="isModalOpen"
 x-on:keydown.escape.window="isModalOpen = false"
 >
@@ -75,24 +76,19 @@ x-on:keydown.escape.window="isModalOpen = false"
     <div class="flex flex-col">
         <h2 class="text-lg text-white font-bold m-2"><?php echo $detail["Name"] ?></h2>
         <h4 class="m-2 text-sm text-gray-300"><?php echo $detail["EnglishName"] ?></h4>
+        <a class="m-2 text-base text-white hover:text-gray-300" href="<?= \core\View::get_root_route() ?>/category/<?= $detail["CategoryId"] ?>"><?php echo $detail["category_name"] ?></a>
         <div class="flex m-2 max-w-80 md:max-w-96 overflow-auto">
 
-            <div class="min-w-fit text-sm text-white border border-black p-2 rounded-lg m-2">
-                <p>256 GB - 8 GB - گلوبال</p>
-                <p>از ۳۴٫۳۸۸٫۰۰۰ تومان</p>
+          <?php foreach ($in_group_schemas as $item): ?>
+          
+            <a href="<?= \core\View::get_root_route() ?>/product/<?= $item["Id"] ?>">
+              <div class="whitespace-nowrap min-w-fit text-sm text-white border border-black p-2 rounded-lg m-2">
+              <p><?= $item["EnglishName"] ?></p>
+              <p>از <?= $item["cheapest_price"] ?> تومان</p>
             </div>
-             <div class="min-w-fit text-sm text-white border border-black p-2 rounded-lg m-2">
-                <p>256 GB - 8 GB - گلوبال</p>
-                <p>از ۳۴٫۳۸۸٫۰۰۰ تومان</p>
-            </div>
-              <div class="min-w-fit text-sm text-white border border-black p-2 rounded-lg m-2">
-                <p>256 GB - 8 GB - گلوبال</p>
-                <p>از ۳۴٫۳۸۸٫۰۰۰ تومان</p>
-            </div>
-              <div class="min-w-fit text-sm text-white border border-black p-2 rounded-lg m-2">
-                <p>256 GB - 8 GB - گلوبال</p>
-                <p>از ۳۴٫۳۸۸٫۰۰۰ تومان</p>
-            </div>
+            </a>
+          <?php endforeach; ?>
+          
             
 
         </div>
@@ -164,5 +160,18 @@ x-on:keydown.escape.window="isModalOpen = false"
 
 
 
+  <div class="bg-gray-500 rounded-lg shadow-lg m-4 p-2">
+  <h2 class="font-bold text-white text-lg m-2">محصولات مشابه</h2>
+  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 content-center">
+        
+    <?php foreach ($related_schemas as $item): ?>
+    <?php \core\View::component('schema_card', [
+    'detail' => $item,
+]); ?>
+
+        
+    <?php endforeach; ?>       
+  </div>
+  </div>
 
 </section>

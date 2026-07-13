@@ -23,14 +23,24 @@ use services\GetSchemasListService;
 
 use services\GetCategoriesTreeService;
 
+use core\ViewComposer;
 
 
 class CategoriesController extends Controller {
     public function get_categories() {         
         $user_agent=Application::$app->request->header('HTTP_USER_AGENT');
         if(str_contains($user_agent,'Mobile')==false){
-            $this->redirect(Application::$app->root_route);   
+            $this->redirect(View::get_root_route());   
         }
+
+    ViewComposer::compose('partials.navbar', function() {
+
+    return [
+        'selected_page'=>'categories',
+    ];
+});
+
+        
         $getAllCategoriesService=new GetAllCategoriesService();
         $categories= $getAllCategoriesService->execute();
           $data = [

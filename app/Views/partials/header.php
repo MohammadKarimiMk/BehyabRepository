@@ -15,7 +15,7 @@
 
         
         
-        <div data-mega-member :class="isOpen==false?'hidden':'block'" class="bg-slate-200 flex w-full h-80 absolute right-0 top-[120px] bg-white shadow-xl rounded-xl" x-data='{activeItem:<?php echo $data["categories"][0]["id"] ?>,
+        <div data-mega-member x-cloak x-show="isOpen" class="bg-slate-200 flex w-full h-80 absolute right-0 top-[120px] bg-white shadow-xl rounded-xl" x-data='{activeItem:<?php echo $data["categories"][0]["id"] ?>,
           allCategories:<?php echo htmlspecialchars(json_encode($data["categories"], JSON_UNESCAPED_UNICODE))?>,
           activeItemName: "<?php echo htmlspecialchars($data["categories"][0]["name"], ENT_QUOTES, 'UTF-8') ?>",
           currentCategories:<?php echo htmlspecialchars(json_encode($data["categories"][0]["categories"], JSON_UNESCAPED_UNICODE))?>}'>
@@ -87,13 +87,13 @@
         
         <input class="w-5/6 bg-transparent placeholder-gray-400 p-2 focus:outline-none" 
                type="text" 
-               placeholder="جست و جو در بین محصولات"
+               placeholder="جست و جو محصولات"
                name="searchKey"
                id="searchInput"
                autocomplete="off"/>
     </form>
 </div>
-   <a class="border border-2 border-gray-300 rounded-xl p-2" href="#">ورود/ثبت نام</a>
+   <a class="hidden md:block border border-2 border-gray-300 rounded-xl p-2" href="#">ورود/ثبت نام</a>
   
 </header>
 
